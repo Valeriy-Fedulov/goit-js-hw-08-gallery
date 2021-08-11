@@ -70,10 +70,11 @@ console.log(ulGalleryRef);
 function createImgRef (imgItems) {
   const arrayList = [];
   imgItems.map(img => {
-    const { preview, description } = img;
+    const { preview, original, description } = img;
     const listGalleryRef = document.createElement('li');
+    listGalleryRef.classList.add('gallery__item');
     console.log(listGalleryRef);
-    listGalleryRef.innerHTML = `<img  src="${preview}" alt="${description}">`;
+        listGalleryRef.innerHTML = `<a class="gallery__link" href="${original}"> <img class="gallery__image" src="${preview}" alt="${description}"></a>`;
     arrayList.push(listGalleryRef);
   });
   return ulGalleryRef.append(...arrayList);
