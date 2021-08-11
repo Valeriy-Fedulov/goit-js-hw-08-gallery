@@ -63,3 +63,20 @@ const galleryItems = [
     description: 'Lighthouse Coast Sea',
   },
 ];
+
+const ulGalleryRef = document.querySelector('.gallery');
+console.log(ulGalleryRef);
+
+function createImgRef (imgItems) {
+  const arrayList = [];
+  imgItems.map(img => {
+    const { preview, description } = img;
+    const listGalleryRef = document.createElement('li');
+    console.log(listGalleryRef);
+    listGalleryRef.innerHTML = `<img  src="${preview}" alt="${description}">`;
+    arrayList.push(listGalleryRef);
+  });
+  return ulGalleryRef.append(...arrayList);
+};
+
+createImgRef(galleryItems);
