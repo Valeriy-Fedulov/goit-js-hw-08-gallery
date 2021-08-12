@@ -1,4 +1,4 @@
-const galleryItems = [
+export const galleryItems = [
   {
     preview:
       'https://cdn.pixabay.com/photo/2019/05/14/16/43/himilayan-blue-poppy-4202825__340.jpg',
@@ -63,21 +63,3 @@ const galleryItems = [
     description: 'Lighthouse Coast Sea',
   },
 ];
-
-const ulGalleryRef = document.querySelector('.gallery');
-console.log(ulGalleryRef);
-
-function createImgRef (imgItems) {
-  const arrayList = [];
-  imgItems.map(img => {
-    const { preview, original, description } = img;
-    const listGalleryRef = document.createElement('li');
-    listGalleryRef.classList.add('gallery__item');
-    console.log(listGalleryRef);
-        listGalleryRef.innerHTML = `<a class="gallery__link" href="${original}"> <img class="gallery__image" src="${preview}" alt="${description}"></a>`;
-    arrayList.push(listGalleryRef);
-  });
-  return ulGalleryRef.append(...arrayList);
-};
-
-createImgRef(galleryItems);
