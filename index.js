@@ -1,9 +1,7 @@
 import { galleryItems } from './app.js';
 
-const ulGalleryRef = document.querySelector('.gallery');
-const divLightBoxRef = document.querySelector('.lightbox');
-
-console.log(ulGalleryRef);
+const ulGalleryRef = document.querySelector('.js-gallery');
+const divLightBoxRef = document.querySelector('.js-lightbox');
 
 function createImgRef (imgItems) {
   const arrayList = [];
@@ -11,8 +9,7 @@ function createImgRef (imgItems) {
     const { preview, original, description } = img;
     const listGalleryRef = document.createElement('li');
     listGalleryRef.classList.add('gallery__item');
-    console.log(listGalleryRef);
-        listGalleryRef.innerHTML = `<a class="gallery__link"> <img class="gallery__image" src="${preview}" alt="${description}"></a>`;
+    listGalleryRef.innerHTML = `<a class="gallery__link" href="${original}"> <img class="gallery__image" src="${preview}" alt="${description}" data-source="${original}"></a>`;
     arrayList.push(listGalleryRef);
   });
   return ulGalleryRef.append(...arrayList);
@@ -20,10 +17,19 @@ function createImgRef (imgItems) {
 
 createImgRef(galleryItems);
 
-function openModal() {
-   // ulGalleryRef.preventDefault();
-    divLightBoxRef.classList.add('is-open');
-    document.querySelector('.lightbox__image').src = "vfg";
+function openModal(e) {
+  e.preventDefault();
+  divLightBoxRef.classList.add('is-open');
+  document.querySelector('.lightbox__image').src = e.target.dataset.source;
+  divLightBoxRef.addEventListener('click', closeModal, 'once');
 };
     
-ulGalleryRef.addEventListener('click', () => { openModal() });
+function closeModal(e) {
+  if (e.target.dataset.action === 'close-lightbox') {
+    const imgLightBox = divLightBoxRef.querySelector('.lightbox__image');
+    imgLightBox.src = "";
+    divLightBoxRef.classList.remove('is-open');
+  };
+};
+
+ulGalleryRef.addEventListener('click', openModal);
