@@ -21,11 +21,22 @@ function createImgRef (imgItems) {
 createImgRef(galleryItems);
 
 function openModal(e) {
-  e.preventDefault();
-  divLightBoxRef.classList.add('is-open');
-  document.querySelector('.lightbox__image').src = e.target.dataset.source;
-  divLightBoxRef.addEventListener('click', closeModal, 'once');
-  window.addEventListener('keydown', closeModalByKey);
+
+  if (e.target.nodeName === 'IMG') {
+    e.preventDefault();
+    divLightBoxRef.classList.add('is-open');
+    document.querySelector('.lightbox__image').src = e.target.dataset.source;
+    divLightBoxRef.addEventListener('click', closeModal, 'once');
+    window.addEventListener('keydown', closeModalByKey);
+  };
+  
+  if (e.target.nodeName === 'A') {
+    e.preventDefault();
+    divLightBoxRef.classList.add('is-open');
+    document.querySelector('.lightbox__image').src = e.target.href;
+    divLightBoxRef.addEventListener('click', closeModal, 'once');
+    window.addEventListener('keydown', closeModalByKey);
+  };
 };
     
 function closeModal(e) {
