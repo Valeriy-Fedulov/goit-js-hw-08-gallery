@@ -25,7 +25,7 @@ function openModal(e) {
 };
     
 function closeModal(e) {
-  if (e.target.dataset.action === 'close-lightbox') {
+  if (e.target.dataset.action === 'close-lightbox' || e.target.classList.value === 'lightbox__overlay') {
     const imgLightBox = divLightBoxRef.querySelector('.lightbox__image');
     imgLightBox.src = "";
     divLightBoxRef.classList.remove('is-open');
