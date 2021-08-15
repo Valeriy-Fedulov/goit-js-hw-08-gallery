@@ -2,6 +2,9 @@ import { galleryItems } from './app.js';
 
 const ulGalleryRef = document.querySelector('.js-gallery');
 const divLightBoxRef = document.querySelector('.js-lightbox');
+const imgLightBox = divLightBoxRef.querySelector('.lightbox__image');
+
+window.preventDefault;
 
 function createImgRef (imgItems) {
   const arrayList = [];
@@ -22,14 +25,24 @@ function openModal(e) {
   divLightBoxRef.classList.add('is-open');
   document.querySelector('.lightbox__image').src = e.target.dataset.source;
   divLightBoxRef.addEventListener('click', closeModal, 'once');
+  window.addEventListener('keydown', closeModalByKey);
 };
     
 function closeModal(e) {
   if (e.target.dataset.action === 'close-lightbox' || e.target.classList.value === 'lightbox__overlay') {
-    const imgLightBox = divLightBoxRef.querySelector('.lightbox__image');
     imgLightBox.src = "";
     divLightBoxRef.classList.remove('is-open');
+    window.removeEventListener('keydown', closeModalByKey);
   };
 };
 
 ulGalleryRef.addEventListener('click', openModal);
+
+function closeModalByKey(e) {
+  e.preventDefault(); 
+  if (e.code === 'Escape') {
+    imgLightBox.src = "";
+    divLightBoxRef.classList.remove('is-open');
+    window.removeEventListener('keydown', closeModalByKey);
+  };
+};
