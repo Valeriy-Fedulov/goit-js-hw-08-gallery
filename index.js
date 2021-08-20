@@ -12,7 +12,7 @@ function createImgRef (imgItems) {
     const { preview, original, description } = img;
     const listGalleryRef = document.createElement('li');
     listGalleryRef.classList.add('gallery__item');
-    listGalleryRef.innerHTML = `<a class="gallery__link" href="${original}"> <img class="gallery__image" src="${preview}" alt="${description}" data-source="${original}" data-index="${arrayList.length}"></a>`;
+    listGalleryRef.innerHTML = `<a class="gallery__link" href="${original}"> <img class="gallery__image" src="${preview}" alt="${description}" data-source="${original}" data-index=${arrayList.length}></a>`;
     arrayList.push(listGalleryRef);
   });
   return ulGalleryRef.append(...arrayList);
@@ -61,11 +61,10 @@ function modalByKey(e) {
   };
 
   if (e.code === 'ArrowLeft') {
-    imgLightBox.src = ulGalleryRef.querySelector(`img[data-index = "${imgLightBox.dataset.index - 1}"]`).src;
+    imgLightBox.src = ulGalleryRef.querySelector(`img[data-index = "${parseInt(imgLightBox.dataset.index) - 1}"]`).src;
   };
   
   if (e.code === 'ArrowRight') {
-    console.log(ulGalleryRef.querySelector(`img[data-index = "${imgLightBox.dataset.index + 1}"]`));
-    // imgLightBox.src = ulGalleryRef.querySelector(`img[data-index = "${imgLightBox.dataset.index + 1}"]`).src;
+    imgLightBox.src = ulGalleryRef.querySelector(`img[data-index = "${parseInt(imgLightBox.dataset.index) + 1}"]`).src;
     };
 };
